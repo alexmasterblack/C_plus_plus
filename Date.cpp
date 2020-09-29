@@ -40,51 +40,32 @@ class Date {
     Date DaysLater(int days) const {
         int all_month[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         int day = our_day, month = our_month, year = our_year;
-        if (!IsLeap()) {
-            if (days <= all_month[month - 1] - day) {
-                Date new_date(year, month, day + days);
-                return new_date;
-            }
-        } else if (IsLeap()) {
+        if (IsLeap()) {
             all_month[1] = 29;
-            if (days <= all_month[month - 1] - day) {
-                Date new_date(year, month, day + days);
-                return new_date;
-            }
+        }
+        if (days <= all_month[month - 1] - day) {
+            Date new_date(year, month, day + days);
+            return new_date;
         }
         while (days != 0) {
-            if (!((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)) {
+            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                all_month[1] = 29;
+            } else {
                 all_month[1] = 28;
-                if (all_month[month - 1] - day <= days) {
-                    int end = all_month[month - 1] - day + 1;
-                    days -= end;
-                    day = 1;
-                    if (month == 12) {
-                        month = 1;
-                        year += 1;
-                    } else {
-                        month += 1;
-                    }
+            }
+            if (all_month[month - 1] - day <= days) {
+                int end = all_month[month - 1] - day + 1;
+                days -= end;
+                day = 1;
+                if (month == 12) {
+                    month = 1;
+                    year += 1;
                 } else {
-                    day += days;
-                    days = 0;
+                    month += 1;
                 }
             } else {
-                all_month[1] = 29;
-                if (all_month[month - 1] - day <= days) {
-                    int end = all_month[month - 1] - day + 1;
-                    days -= end;
-                    day = 1;
-                    if (month == 12) {
-                        month = 1;
-                        year += 1;
-                    } else {
-                        month += 1;
-                    }
-                } else {
-                    day += days;
-                    days = 0;
-                }
+                day += days;
+                days = 0;
             }
         }
         Date new_date(year, month, day);
@@ -137,3 +118,4 @@ class Date {
         }
     }
 };
+
