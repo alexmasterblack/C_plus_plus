@@ -15,7 +15,7 @@ Num &Num::operator=(const Num& other) {
 }
 Num Num::operator+(const Num& other) {
     int64_t v = ((int64_t) value + (int64_t) other.value);
-    return Num((int64_t) (v % modulo), modulo);
+    return Num(v % modulo, modulo);
 }
 Num Num::operator-(const Num& other) {
     int new_value;
@@ -28,11 +28,11 @@ Num Num::operator-(const Num& other) {
 }
 Num Num::operator*(const Num& other) {
     int64_t a = ((int64_t) value * (int64_t) other.value);
-    return Num((int64_t) (a % modulo), modulo);
+    return Num(a % modulo, modulo);
 }
 Num Num::operator+(int num) {
     int64_t new_value = ((int64_t) value + (int64_t) num);
-    return Num((int64_t) (new_value % modulo), modulo);
+    return Num(new_value % modulo, modulo);
 }
 Num Num::operator-(int num) {
     int new_value;
@@ -45,11 +45,11 @@ Num Num::operator-(int num) {
 }
 Num Num::operator*(int num) {
     int64_t answer = ((int64_t) value * (int64_t) num);
-    return Num((int64_t) (answer % modulo), modulo);
+    return Num(answer % modulo, modulo);
 }
 Num &Num::operator+=(const Num& other) {
     int64_t v = ((int64_t) value + (int64_t) other.value);
-    value = (int64_t) (v % modulo);
+    value = v % modulo;
     return *this;
 }
 Num &Num::operator-=(const Num& other) {
@@ -62,12 +62,12 @@ Num &Num::operator-=(const Num& other) {
 }
 Num &Num::operator*=(const Num& other) {
     int64_t a = ((int64_t) value * (int64_t) other.value);
-    value = (int64_t) (a % modulo);
+    value = a % modulo;
     return *this;
 }
 Num &Num::operator+=(int num) {
     int64_t new_value = ((int64_t) value + (int64_t) num);
-    value = (int64_t) (new_value % modulo);
+    value = new_value % modulo;
     return *this;
 }
 Num &Num::operator-=(int num) {
@@ -80,6 +80,6 @@ Num &Num::operator-=(int num) {
 }
 Num &Num::operator*=(int num) {
     int64_t answer = ((int64_t) value * (int64_t) num);
-    value = (int64_t) (answer % modulo);
+    value = answer % modulo;
     return *this;
 }
